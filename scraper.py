@@ -13,7 +13,7 @@ parser.add_argument("--offset", metavar="integer", type=int, help="Offset end da
 parser.add_argument("--length", metavar="integer", type=int, help="Number of days to scrape to given date", default=1)
 parser.add_argument("--timeframe", metavar="string", type=str, help="Candle time frame", default="1m")
 parser.add_argument("--symbol", metavar="string", type=str, help="Candle time frame", default="BTCUSDT")
-parser.add_argument("--delay", metavar="integer", type=str, help="Request delay in seconds", default=3)
+parser.add_argument("--delay", metavar="integer", type=int, help="Request delay in seconds", default=3)
 
 args = vars(parser.parse_args())
 
