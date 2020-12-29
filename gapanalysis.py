@@ -10,11 +10,21 @@ minute = second * 60
 hour = minute * 60
 day = hour * 24
 
-folder =  os.path.join("data", "BINANCE_BTCUSDT") if len(sys.argv) == 1 else sys.argv[1]
+import argparse
 
+
+parser = argparse.ArgumentParser(add_help=True)
+
+parser.add_argument("--path", type=str, help="Path to dump folder", required=True)
+parser.add_argument("--time", type=int, help="Time in minutes", default=1)
+
+args = vars(parser.parse_args())
+
+folder =  os.path.relpath(args['path'])
+time = args['time']
 dumpPath = os.path.join(os.getcwd(), folder)
 
-dumpJsons = list(filter(lambda file: re.match("^\d{4}-\d{2}-\d{2}\.[12]\.json$", file), os.listdir(dumpPath)))
+dumpJsons = list(filter(lambda file: re.match("^\d{4}-\d{2}-\d{2}(\.[12])?\.json$", file), os.listdir(dumpPath)))
 
 consolidatedData = []
 
@@ -32,9 +42,9 @@ for i in range(len(dumpJsons)):
         if lastTime == []:
             lastTime = [data[j][0], dumpJsons[i], j]
         else:
-            if data[j][0] - lastTime[0] > minute:
+            if data[j][0] - lastTime[0] > minute * time:
                 gaps.append([lastTime[0], data[j][0]])
-                print("Skipped: lastTime:", lastTime, " Current: ", [data[j][0], dumpJsons[i], j], "Difference: ", str((float(data[j][0]) - float(lastTime[0]))/minute))
+                print("Gap: lastTime:", lastTime, " Current: ", [data[j][0], dumpJsons[i], j], "Difference: ", str((float(data[j][0]) - float(lastTime[0]))/minute))
 
             lastTime = [data[j][0], dumpJsons[i], j]
 
