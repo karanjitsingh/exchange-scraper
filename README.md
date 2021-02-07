@@ -62,3 +62,29 @@ Gap: lastTime: [1606715100000, '2020-11-30.json', 45]  Current:  [1606719600000,
 Gap: lastTime: [1608559200000, '2020-12-21.json', 78]  Current:  [1608573600000, '2020-12-21.json', 79] Difference:  240.0
 Gap: lastTime: [1608860700000, '2020-12-25.json', 29]  Current:  [1608865200000, '2020-12-25.json', 30] Difference:  75.0
 ```
+
+
+### Binance REST APIs
+
+https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data
+
+#### Interpreting the response
+
+```
+[
+  [
+    1499040000000,      // Open time
+    "0.01634790",       // Open
+    "0.80000000",       // High
+    "0.01575800",       // Low
+    "0.01577100",       // Close
+    "148976.11427815",  // Volume
+    1499644799999,      // Close time
+    "2434.19055334",    // Quote asset volume
+    308,                // Number of trades
+    "1756.87402397",    // Taker buy base asset volume
+    "28.46694368",      // Taker buy quote asset volume
+    "17928899.62484339" // Ignore.
+  ]
+]
+```
